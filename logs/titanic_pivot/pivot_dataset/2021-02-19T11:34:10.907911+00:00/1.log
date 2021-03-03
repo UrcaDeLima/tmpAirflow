@@ -1,0 +1,22 @@
+[2021-02-19 14:37:58,699] {taskinstance.py:851} INFO - Dependencies all met for <TaskInstance: titanic_pivot.pivot_dataset 2021-02-19T11:34:10.907911+00:00 [queued]>
+[2021-02-19 14:37:58,720] {taskinstance.py:851} INFO - Dependencies all met for <TaskInstance: titanic_pivot.pivot_dataset 2021-02-19T11:34:10.907911+00:00 [queued]>
+[2021-02-19 14:37:58,720] {taskinstance.py:1042} INFO - 
+--------------------------------------------------------------------------------
+[2021-02-19 14:37:58,720] {taskinstance.py:1043} INFO - Starting attempt 1 of 2
+[2021-02-19 14:37:58,720] {taskinstance.py:1044} INFO - 
+--------------------------------------------------------------------------------
+[2021-02-19 14:37:58,727] {taskinstance.py:1063} INFO - Executing <Task(PythonOperator): pivot_dataset> on 2021-02-19T11:34:10.907911+00:00
+[2021-02-19 14:37:58,729] {standard_task_runner.py:52} INFO - Started process 57620 to run task
+[2021-02-19 14:37:58,732] {standard_task_runner.py:76} INFO - Running: ['airflow', 'tasks', 'run', 'titanic_pivot', 'pivot_dataset', '2021-02-19T11:34:10.907911+00:00', '--job-id', '4', '--pool', 'default_pool', '--raw', '--subdir', 'DAGS_FOLDER/titanicTest.py', '--cfg-path', '/tmp/tmpik9iilk3', '--error-file', '/tmp/tmplfp9y4e6']
+[2021-02-19 14:37:58,732] {standard_task_runner.py:77} INFO - Job 4: Subtask pivot_dataset
+[2021-02-19 14:37:58,768] {logging_mixin.py:104} INFO - Running <TaskInstance: titanic_pivot.pivot_dataset 2021-02-19T11:34:10.907911+00:00 [running]> on host oleg-desktop
+[2021-02-19 14:37:58,810] {taskinstance.py:1255} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=airflow
+AIRFLOW_CTX_DAG_ID=titanic_pivot
+AIRFLOW_CTX_TASK_ID=pivot_dataset
+AIRFLOW_CTX_EXECUTION_DATE=2021-02-19T11:34:10.907911+00:00
+AIRFLOW_CTX_DAG_RUN_ID=manual__2021-02-19T11:34:10.907911+00:00
+[2021-02-19 14:37:59,796] {python.py:118} INFO - Done. Returned value was: None
+[2021-02-19 14:37:59,810] {taskinstance.py:1159} INFO - Marking task as SUCCESS. dag_id=titanic_pivot, task_id=pivot_dataset, execution_date=20210219T113410, start_date=20210219T113758, end_date=20210219T113759
+[2021-02-19 14:37:59,843] {taskinstance.py:1220} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2021-02-19 14:37:59,865] {local_task_job.py:146} INFO - Task exited with return code 0

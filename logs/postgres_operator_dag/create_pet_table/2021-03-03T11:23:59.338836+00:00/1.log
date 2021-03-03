@@ -1,0 +1,47 @@
+[2021-03-03 14:23:59,752] {taskinstance.py:851} INFO - Dependencies all met for <TaskInstance: postgres_operator_dag.create_pet_table 2021-03-03T11:23:59.338836+00:00 [queued]>
+[2021-03-03 14:23:59,773] {taskinstance.py:851} INFO - Dependencies all met for <TaskInstance: postgres_operator_dag.create_pet_table 2021-03-03T11:23:59.338836+00:00 [queued]>
+[2021-03-03 14:23:59,774] {taskinstance.py:1042} INFO - 
+--------------------------------------------------------------------------------
+[2021-03-03 14:23:59,774] {taskinstance.py:1043} INFO - Starting attempt 1 of 1
+[2021-03-03 14:23:59,774] {taskinstance.py:1044} INFO - 
+--------------------------------------------------------------------------------
+[2021-03-03 14:23:59,781] {taskinstance.py:1063} INFO - Executing <Task(PostgresOperator): create_pet_table> on 2021-03-03T11:23:59.338836+00:00
+[2021-03-03 14:23:59,782] {standard_task_runner.py:52} INFO - Started process 49864 to run task
+[2021-03-03 14:23:59,784] {standard_task_runner.py:76} INFO - Running: ['airflow', 'tasks', 'run', 'postgres_operator_dag', 'create_pet_table', '2021-03-03T11:23:59.338836+00:00', '--job-id', '6', '--pool', 'default_pool', '--raw', '--subdir', 'DAGS_FOLDER/clickhouseLogging.py', '--cfg-path', '/tmp/tmprin2lru3', '--error-file', '/tmp/tmp8cng7bpm']
+[2021-03-03 14:23:59,785] {standard_task_runner.py:77} INFO - Job 6: Subtask create_pet_table
+[2021-03-03 14:23:59,823] {logging_mixin.py:104} INFO - Running <TaskInstance: postgres_operator_dag.create_pet_table 2021-03-03T11:23:59.338836+00:00 [running]> on host oleg-desktop
+[2021-03-03 14:23:59,866] {taskinstance.py:1255} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=airflow
+AIRFLOW_CTX_DAG_ID=postgres_operator_dag
+AIRFLOW_CTX_TASK_ID=create_pet_table
+AIRFLOW_CTX_EXECUTION_DATE=2021-03-03T11:23:59.338836+00:00
+AIRFLOW_CTX_DAG_RUN_ID=manual__2021-03-03T11:23:59.338836+00:00
+[2021-03-03 14:23:59,866] {postgres.py:69} INFO - Executing: 
+            CREATE TABLE IF NOT EXISTS pet (
+            pet_id SERIAL PRIMARY KEY,
+            name VARCHAR NOT NULL,
+            pet_type VARCHAR NOT NULL,
+            birth_date DATE NOT NULL,
+            OWNER VARCHAR NOT NULL);
+          
+[2021-03-03 14:23:59,899] {base.py:65} INFO - Using connection to: id: postgres_default. Host: postgres, Port: None, Schema: airflow, Login: postgres, Password: XXXXXXXX, extra: None
+[2021-03-03 14:23:59,900] {taskinstance.py:1455} ERROR - could not translate host name "postgres" to address: Temporary failure in name resolution
+Traceback (most recent call last):
+  File "/home/oleg/web/python/apacheAirflow/.venv/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 1112, in _run_raw_task
+    self._prepare_and_execute_task_with_callbacks(context, task)
+  File "/home/oleg/web/python/apacheAirflow/.venv/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 1285, in _prepare_and_execute_task_with_callbacks
+    result = self._execute_task(context, task_copy)
+  File "/home/oleg/web/python/apacheAirflow/.venv/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 1315, in _execute_task
+    result = task_copy.execute(context=context)
+  File "/home/oleg/web/python/apacheAirflow/.venv/lib/python3.8/site-packages/airflow/providers/postgres/operators/postgres.py", line 71, in execute
+    self.hook.run(self.sql, self.autocommit, parameters=self.parameters)
+  File "/home/oleg/web/python/apacheAirflow/.venv/lib/python3.8/site-packages/airflow/hooks/dbapi.py", line 173, in run
+    with closing(self.get_conn()) as conn:
+  File "/home/oleg/web/python/apacheAirflow/.venv/lib/python3.8/site-packages/airflow/providers/postgres/hooks/postgres.py", line 108, in get_conn
+    self.conn = psycopg2.connect(**conn_args)
+  File "/home/oleg/web/python/apacheAirflow/.venv/lib/python3.8/site-packages/psycopg2/__init__.py", line 127, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: could not translate host name "postgres" to address: Temporary failure in name resolution
+
+[2021-03-03 14:23:59,901] {taskinstance.py:1496} INFO - Marking task as FAILED. dag_id=postgres_operator_dag, task_id=create_pet_table, execution_date=20210303T112359, start_date=20210303T112359, end_date=20210303T112359
+[2021-03-03 14:23:59,955] {local_task_job.py:146} INFO - Task exited with return code 1
