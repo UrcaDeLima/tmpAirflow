@@ -22,36 +22,6 @@ def get_activated_sources():
     os.system('time clickhouse-client --query="INSERT INTO admin_backend_logs.logs_tmp FORMAT CSV" < /home/oleg/web/go/gd_admin_backend/src/logger/app.csv')# поменять путь
     print(client.execute("CREATE TABLE admin_backend_logs.logs　ENGINE = ReplacingMergeTree(day, (date), 8192)　AS SELECT DISTINCT　toDate(date) AS day,　date,　method,　originalUrl,　statusCode,　contentType,　userAgent,　ip　FROM admin_backend_logs.logs_tmp;"))
    
-    #print(client.execute('time clickhouse-client --query="INSERT INTO admin_backend_logs.logs FORMAT CSV" < /home/oleg/web/go/gd_admin_backend/src/logger/app1.csv'))
-    #time clickhouse-client --query="INSERT INTO admin_backend_logs.logs_tmp FORMAT CSV" < /home/oleg/web/go/gd_admin_backend/src/logger/app1.csv
-    
-    
-    # data_file = []
-    # in_file = '/home/oleg/web/go/gd_admin_backend/src/logger/app.log' # поменять на нормальный путь
-
-    # with open(in_file, 'r') as read_file:
-    #     for line in read_file:
-    #         tmp = line.strip('\n')
-    #         tmp = tmp.split(' -- ')
-    #         tmp[1] = tmp[1].split(' ')
-    #         if(tmp[1][0] == "GET"):
-    #             tmp[1] = { "method": tmp[1][0], "originalUrl": tmp[1][1], "statusCode": tmp[1][2], "contentType": tmp[1][3] + tmp[1][4], "userAgent": tmp[1][5], "ip": tmp[1][6] }
-    #             data_file.append(tmp[1])
-
-    # read_file.close()
-    
-    # print(data_file)
-    # request = f"INSERT INTO admin_backend_log (method, originalUrl, statusCode, contentType, userAgent, ip) VALUES('{data_file[0]['method']}', '{data_file[0]['originalUrl']}', '{data_file[0]['statusCode']}', '{data_file[0]['contentType']}', '{data_file[0]['userAgent']}', '{data_file[0]['ip']}');"
-    
-    # print(request)
-    # pg_hook = PostgresHook(postgre_conn_id="postgres_default", schema="airflow")
-
-    # conn = pg_hook.get_conn()
-    # cur = conn.cursor()
-    # cur.execute(request)
-    # conn.commit()
-
-    # return conn
     return 1
 
 with DAG('admin_backend_logs_dag',
