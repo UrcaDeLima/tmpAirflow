@@ -6,6 +6,8 @@ from airflow.operators.dummy_operator import DummyOperator
 from airflow.operators.python_operator import PythonOperator
 from clickhouse_driver.client import Client
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
 
 default_args = {
@@ -17,10 +19,11 @@ default_args = {
 }
 
 def get_activated_sources():
+    PATH_LOG_FILE = os.getenv('PATH_LOG_FILE')
     client = Client('127.0.0.1')
     print(client.execute("DROP TABLE IF EXISTS admin_backend_logs.logs"))
-    os.system('time clickhouse-client --query="INSERT INTO admin_backend_logs.logs_tmp FORMAT CSV" < /home/oleg/web/go/gd_admin_backend/src/logger/app.csv')# поменять путь
-    print(client.execute("CREATE TABLE admin_backend_logs.logs　ENGINE = ReplacingMergeTree(day, (date), 8192)　AS SELECT DISTINCT　toDate(date) AS day,　date,　method,　originalUrl,　statusCode,　contentType,　userAgent,　ip　FROM admin_backend_logs.logs_tmp;"))
+    os.system(f'time clickhouse-client --query="INSERT INTO admin_backend_logs.logs_tmp FORMAT CSV" < {PATH_LOG_FILE}')
+    print(client.execute("CREATE TABLE admin_backend_logs.logs　ENGINE = ReplacingMergeTree(day, (date), 8192)　AS SELECT DISTINCT　toDate(date) AS day,　date,　method,　originalUrl,　statusCode,　contentType,　userAgent,　ip, userId　FROM admin_backend_logs.logs_tmp;"))
    
     return 1
 
